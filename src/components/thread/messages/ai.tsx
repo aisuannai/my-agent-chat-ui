@@ -14,6 +14,7 @@ import { isAgentInboxInterruptSchema } from "@/lib/agent-inbox-interrupt";
 import { ThreadView } from "../agent-inbox";
 import { useQueryState, parseAsBoolean } from "nuqs";
 import { GenericInterruptView } from "./generic-interrupt";
+import { AskUserView, isAskUserInterrupt } from "./ask-user-view";
 import { useArtifact } from "../artifact";
 
 function CustomComponent({
@@ -92,6 +93,13 @@ function Interrupt({
         )}
       {interrupt &&
       !isAgentInboxInterruptSchema(interrupt) &&
+      isAskUserInterrupt(interrupt) &&
+      (isLastMessage || hasNoAIOrToolMessages) ? (
+        <AskUserView interrupt={fallbackValue} />
+      ) : null}
+      {interrupt &&
+      !isAgentInboxInterruptSchema(interrupt) &&
+      !isAskUserInterrupt(interrupt) &&
       (isLastMessage || hasNoAIOrToolMessages) ? (
         <GenericInterruptView interrupt={fallbackValue} />
       ) : null}
