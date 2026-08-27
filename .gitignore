@@ -28,3 +28,7 @@ dist-ssr
 .env
 .next/
 next-env.d.ts
+
+# Local tooling & build cache
+.omo/
+tsconfig.tsbuildinfo
